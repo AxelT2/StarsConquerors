@@ -1,6 +1,5 @@
 
 import kivy
-
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
@@ -13,23 +12,83 @@ from kivy.config import Config
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from sphinx.addnodes import only
+from kivy.uix.boxlayout import BoxLayout
 
 Builder.load_string(""" 
 <PantallaEstrellas>    
     GridLayout:
         cols: 1
-        Label:
-            text:"Imagen"
-        Label:
-            text: "Info aquí"
         Button:
-            text: "Returbio"            
+            text:"Galaxias"
+        Button:
+            text: "Sistema Solar"
+        Button:
+            text: "Constelaciones"            
     
+<PantallaGalaxias>
+    BoxLayout:
+        Button:
+            text: "Galaxia1"
+            on_press: root.manager.current = 'Galaxy1'
+        Button:
+            text: "Galaxia2"
+            on_press: root.manager.current = 'Galaxy2'
+        Button:
+            text: "Galaxia3"    
+            on_press: root.manager.current = 'Galaxy3'    
     
+<PantallaSistema>    
+    GridLayout:
+        Label:
+            text: "Imagen del sistema"
+        Label:
+            text: "Info del planeta seleccionado"
+            
+<PantallaConstela>
+    BoxLayout:
+        Label:
+            text: "Imagen de la constelación"
+        Label:
+            text: "Info de la constelacion"
+            
+<PantallaEspacio>
+    BoxLayout:
+        Label
+            text: "Hi there, conqueror!"
+        Label
+            text: "What are you looking for today?"    
+        Label.
+            text: "Tierra desde el espacio"    
+                    
+<PantallaMisiones>
     
+<PantallaSatelites>
 """)
 
+class PantallaGalaxias(Screen):
+
+    pass
+
 class PantallaEstrellas(Screen):
+
+    pass
+
+class PantallaSistema(Screen):
+
+    pass
+
+class PantallaConstela(Screen):
+
+    pass
+
+class PantallaEspacio(Screen):
+
+    pass
+class PantallaMisiones(Screen):
+
+    pass
+
+class PantallaSatelites(Screen):
 
     pass
 
@@ -64,6 +123,13 @@ class Grid(GridLayout):
     def Presionado(self, instance):
         sm.switch_to(PantallaEstrellas)
 
+    def PresionadoEspace(self, instance):
+        sm.switch_to(PantallaEspacio)
+
+    def PresionadoMision(self, instance):
+        sm.switch_to(PantallaMisiones)
+    def PresionadoSateli(self, instance):
+        sm.switch_to(PantallaSatelites)
 
 sm = ScreenManager()
 
@@ -71,6 +137,9 @@ sm = ScreenManager()
 class Stars(App):
         def build(self):
             sm.add_widget(PantallaEstrellas(name='Estrellas'))
+            sm.add_widget(PantallaGalaxias(name='Galaxias'))
+            sm.add_widget(PantallaSistema(name='Sistema'))
+            sm.add_widget(PantallaEspacio(name='Espacio'))
             return Grid()
 
 
